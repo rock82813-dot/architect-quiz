@@ -41,7 +41,7 @@
 
   function original(path, page) {
     const url = path.split('/').map(encodeURIComponent).join('/');
-    return (location.protocol === 'file:' ? '../' : '/') + url + (page ? '#page=' + page : '');
+    return '../' + url + (page ? '#page=' + page : '');
   }
 
   function shuffle(items) {
