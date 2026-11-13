@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>築試｜建築師測驗</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="bank.js"></script>
+  <script defer src="sources.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#" id="home"><span class="logo" aria-hidden="true">築</span><span>築試<small>建築師考試練習</small></span></a>
+    <span class="badge">考選部原卷</span>
+  </header>
+  <main>
+    <section id="setup">
+      <div class="hero">
+        <p class="eyebrow">ARCHITECT EXAM PRACTICE</p>
+        <h1>練題、模考、複習錯題</h1>
+        <p>營建法規與實務 · 建築構造與施工</p>
+        <div class="stats"><span><b>2,880</b> 歷屆選擇題</span><span><b>36</b> 份可計分原卷</span><span><b>32</b> 份申論題原卷</span></div>
+      </div>
+      <nav class="modes" aria-label="練習模式">
+        <button data-mode="practice" aria-pressed="true"><b>01</b> 歷屆練習</button>
+        <button data-mode="instant" aria-pressed="false"><b>02</b> 即時作答</button>
+        <button data-mode="mock" aria-pressed="false"><b>03</b> 限時模擬</button>
+        <button data-mode="ai" aria-pressed="false"><b>04</b> AI 出題</button>
+        <button data-mode="wrong" aria-pressed="false"><b>05</b> 錯題重練</button>
+      </nav>
+      <form id="setup-form" class="panel">
+        <h2 id="mode-title">歷屆練習</h2>
+        <p id="mode-hint" class="muted"></p>
+        <div class="fields">
+          <label id="subject-field">科目<select id="subject"><option value="law">營建法規與實務</option><option value="build">建築構造與施工</option><option value="all">混合兩科</option></select></label>
+          <label id="year-field">年度<select id="year"></select></label>
+          <label id="count-field">題數<select id="count"></select></label>
+          <label id="ai-format-field" hidden>作答方式
+            <select id="ai-format">
+              <option value="instant">即時作答</option>
+              <option value="mock">模擬試題</option>
+            </select>
+          </label>
+          <label id="model-field" hidden>本機模型<select id="model"></select></label>
+        </div>
+        <label class="check" id="review-field"><input type="checkbox" id="verified" checked> 只練有法規或規範詳解的歷屆題</label>
+        <div id="ai-info" class="muted" hidden>
+          <p id="ai-format-hint"></p>
+          <p id="model-status" role="status"></p>
+          <button class="secondary" type="button" id="template-start">離線練 80 題情境題</button>
+        </div>
+        <div class="actions"><button type="submit" id="start">開始練習</button><span id="setup-message" role="status"></span></div>
+      </form>
+      <details class="panel archive">
+        <summary>民國 81–96 年申論題原卷</summary>
+        <p class="muted">考選部未提供可供自動計分的答案，可開啟 PDF 自行練習。</p>
+        <div id="archive"></div>
+      </details>
+    </section>
+    <section id="quiz" hidden>
+      <div class="session-top">
+        <button type="button" class="secondary" id="exit">返回設定</button>
+        <span id="session-title"></span>
+        <strong id="timer" hidden></strong>
+        <button type="button" id="finish">提前交卷</button>
+      </div>
+      <div class="panel question">
+        <div class="question-header"><p class="eyebrow" id="question-meta"></p><span id="progress"></span></div>
+        <progress id="bar" value="0"></progress>
+        <div id="stem"></div>
+        <div id="choices" class="choices" role="group" aria-label="選項"></div>
+        <label id="multi-field" class="check"><input type="checkbox" id="multi"> 複選作答</label>
+        <div id="feedback" class="feedback" tabindex="-1" aria-live="polite" hidden></div>
+        <div class="question-actions">
+          <button type="button" class="secondary" id="prev">上一題</button>
+          <button type="button" id="check-answer">確認複選</button>
+          <button type="button" class="secondary" id="reveal-answer" hidden>直接看答案</button>
+          <button type="button" class="secondary" id="next">下一題</button>
+        </div>
+        <div id="question-source"></div>
+      </div>
+      <div class="panel navigator">
+        <div class="question-header"><b>題號</b></div>
+        <div id="numbers" class="numbers"></div>
+      </div>
+    </section>
+    <section id="results" class="panel results" hidden>
+      <p class="eyebrow">RESULTS</p><h1>作答結果</h1>
+      <p id="score" class="score"></p><p id="breakdown"></p>
+      <div class="actions"><button type="button" id="inspect">查看答案與詳解</button><button type="button" class="secondary" id="again">回到練習設定</button></div>
+    </section>
+  </main>
+  <footer>歷屆題依考選部公告計分。備考時請核對法規適用版本。</footer>
+</body>
+</html>
